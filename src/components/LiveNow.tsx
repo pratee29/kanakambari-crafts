@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Users, Plus } from "lucide-react";
+import { Users, Plus, Eye, Play, Clock, Radio } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import CreateLiveSessionModal from "./CreateLiveSessionModal";
@@ -13,51 +13,54 @@ import {
 
 const liveRooms = [
   {
-    title: "Python",
-    subtitle: "Coding",
+    title: "Python Masterclass",
+    subtitle: "Advanced Data Structures & Algorithms",
     host: "Sarah Chen",
     users: 124,
-    mode: "Discussion",
-    gradient: "from-[#E6B800] via-[#E89A3C] to-[#D66B6B]",
+    mode: "Coding",
+    gradient: "from-amber-500 to-orange-600",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format",
+    duration: "2h 15m",
+    isFree: true,
+    avatar: "SC",
   },
   {
-    title: "UI Design",
-    subtitle: "Workshop",
+    title: "UI/UX Design Workshop",
+    subtitle: "Figma to Production Workflow",
     host: "Alex Rivera",
     users: 89,
-    mode: "Learning",
-    gradient: "from-[#7F00FF] via-[#9F44FF] to-[#C77DFF]",
+    mode: "Design",
+    gradient: "from-violet-600 to-pink-600",
+    image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&auto=format",
+    duration: "1h 45m",
+    isFree: false,
+    avatar: "AR",
   },
   {
-    title: "Public",
-    subtitle: "Speaking",
+    title: "Public Speaking Mastery",
+    subtitle: "Confidence, Clarity & Stage Presence",
     host: "Priya Sharma",
     users: 156,
     mode: "Practice",
-    gradient: "from-[#FF512F] via-[#F09819] to-[#FFD200]",
+    gradient: "from-emerald-500 to-teal-600",
+    image: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&auto=format",
+    duration: "3h 00m",
+    isFree: true,
+    avatar: "PS",
   },
   {
-    title: "Android Dev",
-    subtitle: "Live Coding",
-    host: "David Kim",
-    users: 98,
-    mode: "Observe",
-    gradient: "from-[#FF512F] via-[#F09819] to-[#FFD200]",
+    title: "Machine Learning 101",
+    subtitle: "Neural Networks from Scratch",
+    host: "Aisha Patel",
+    users: 203,
+    mode: "AI/ML",
+    gradient: "from-rose-500 to-fuchsia-600",
+    image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&auto=format",
+    duration: "1h 20m",
+    isFree: true,
+    avatar: "AP",
   },
 ];
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30, rotateX: 15 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      duration: 0.6,
-      delay: i * 0.1,
-    },
-  }),
-};
 
 export default function LiveNow({ userRole }: { userRole?: string }) {
   const [showCreate, setShowCreate] = useState(false);
@@ -73,128 +76,133 @@ export default function LiveNow({ userRole }: { userRole?: string }) {
 
   return (
     <>
-    <CreateLiveSessionModal open={showCreate} onClose={() => setShowCreate(false)} />
-    <section className="py-24 bg-[#070B24] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <CreateLiveSessionModal open={showCreate} onClose={() => setShowCreate(false)} />
+      <section className="py-24 bg-[#070B24] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative">
 
-        {/* HEADER
-        <div className="flex items-start justify-between mb-16">
-          <div>
-            <span className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#2A1410] border border-orange-400/30 text-orange-400 font-semibold">
-              🔴 LIVE NOW 
-            </span>
+          {/* HEADER */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center justify-between mb-12"
+          >
+            <div>
+              <div className="flex items-center gap-3 mb-3">
+                <motion.span
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-xs font-bold"
+                >
+                  <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse" /> LIVE NOW
+                </motion.span>
+                <span className="text-white/40 text-sm">{liveRooms.reduce((a, r) => a + r.users, 0)}+ watching</span>
+              </div>
+              <h2 className="text-4xl font-black text-white">
+                Live <span className="text-orange-400">Sessions</span>
+              </h2>
+              <p className="text-white/60 mt-2">Real teachers. Real learning. No recordings.</p>
+            </div>
 
-            <p className="text-white/70 mt-6 text-lg">
-              People talking. Ideas flowing. No scripts.
-            </p>
-          </div>
-
-          <button className="px-7 py-2.5 rounded-full bg-orange-500 text-black font-medium hover:bg-orange-400 transition">
-            View all
-          </button>
-        </div> */}
-
-
-         <div className="flex items-center justify-between mb-12">
-          <div>
-            <h2 className="text-4xl font-bold text-white">
-             🔴 Live <span className="text-orange-400">Now</span>
-            </h2>
-            <p className="text-white/60 mt-2">
-              People talking. Ideas flowing. No scripts.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {userRole && (
-              <button onClick={handleCreate} className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition">
-                <Plus size={18} /> {userRole === 'CREATE' ? 'Create Live Session' : '🔒 Create (Upgrade)'}
+            <div className="flex items-center gap-3">
+              {userRole && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleCreate}
+                  className="px-5 py-2 rounded-full bg-gradient-to-r from-orange-400 to-pink-500 text-white font-semibold flex items-center gap-2 hover:opacity-90 transition"
+                >
+                  <Plus size={18} /> {userRole === 'CREATE' ? 'Create Session' : '🔒 Create (Upgrade)'}
+                </motion.button>
+              )}
+              <button onClick={() => navigate('/live-sessions')} className="px-6 py-2 rounded-full bg-orange-500 text-black font-semibold hover:bg-orange-400 transition">
+                View all
               </button>
-            )}
-            <button onClick={() => navigate('/live-sessions')} className="px-6 py-2 rounded-full bg-orange-500 text-black font-semibold hover:bg-orange-400 transition">
-              View all
-            </button>
-          </div>
-        </div>
+            </div>
+          </motion.div>
 
-        {/* CAROUSEL */}
-        <Carousel opts={{ align: "start", loop: true }}>
-          <CarouselContent className="">
-            {liveRooms.map((room, i) => (
-              <CarouselItem key={i} className="basis-full sm:basis-1/2 lg:basis-1/3 flex justify-center">
-                <div className="w-full max-w-[360px] flex justify-center">
+          {/* CAROUSEL with image cards */}
+          <Carousel opts={{ align: "start", loop: true }}>
+            <CarouselContent>
+              {liveRooms.map((room, i) => (
+                <CarouselItem key={i} className="lg:basis-1/3 md:basis-1/2 px-3">
                   <motion.div
-                    custom={i}
-                    variants={cardVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="w-full"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ y: -6 }}
+                    className="group cursor-pointer"
+                    onClick={() => navigate('/live-sessions')}
                   >
-                    <div
-                      className={`h-20 sm:h-24 rounded-full px-3 sm:px-5
-                      bg-gradient-to-r ${room.gradient}
-                      flex items-center justify-between
-                      shadow-lg hover:shadow-2xl
-                      transition-all duration-300
-                      transform hover:scale-105
-                      cursor-pointer gap-2`}
-                    style={{
-                      perspective: "1000px",
-                      transformStyle: "preserve-3d",
-                    }}
-                  >
-                    {/* LEFT */}
-                    <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
-                      {/* LIVE */}
-                      <motion.span
-                        animate={{ scale: [1, 1.05, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="flex items-center gap-1 text-xs bg-black/30 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-white font-medium whitespace-nowrap text-[11px] sm:text-xs"
-                      >
-                        <motion.span
-                          animate={{ opacity: [1, 0.5, 1] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                          className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-yellow-300 rounded-full"
-                        />
-                        LIVE
-                      </motion.span>
+                    <div className="relative h-[280px] rounded-3xl overflow-hidden border border-white/10">
+                      {/* BG IMAGE */}
+                      <img src={room.image} alt={room.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                      <div className={`absolute inset-0 bg-gradient-to-br ${room.gradient} opacity-50`} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />
 
-                      {/* TITLE & SUBTITLE */}
-                      <div className="min-w-0 flex-1">
-                        <h3 className="text-white text-sm sm:text-2xl font-bold leading-tight truncate">
-                          {room.title}
-                        </h3>
-                        <p className="text-white/80 text-xs leading-tight truncate">
-                          {room.subtitle}
-                        </p>
+                      {/* CONTENT */}
+                      <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                        {/* TOP */}
+                        <div className="flex items-start justify-between">
+                          <motion.span
+                            animate={{ opacity: [1, 0.6, 1] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-red-500/30 backdrop-blur-sm border border-red-400/50 text-red-300 text-xs font-bold"
+                          >
+                            <span className="w-1.5 h-1.5 bg-red-400 rounded-full" /> LIVE
+                          </motion.span>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs px-2 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white/70 flex items-center gap-1">
+                              <Clock size={10} /> {room.duration}
+                            </span>
+                            {!room.isFree && (
+                              <span className="text-xs px-2 py-1 rounded-full bg-orange-500/30 backdrop-blur-sm border border-orange-400/50 text-orange-300">
+                                PRO
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* CENTER PLAY */}
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          className="self-center w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                        >
+                          <Play size={22} className="text-white fill-white ml-1" />
+                        </motion.div>
+
+                        {/* BOTTOM */}
+                        <div>
+                          <span className="px-2.5 py-1 rounded-full bg-orange-500/30 backdrop-blur-sm border border-orange-400/30 text-orange-300 text-xs font-medium mb-2 inline-block">{room.mode}</span>
+                          <h3 className="text-white font-bold text-base leading-snug mb-1 drop-shadow-lg">{room.title}</h3>
+                          <p className="text-white/60 text-xs mb-3">{room.subtitle}</p>
+
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <div className={`w-7 h-7 rounded-full bg-gradient-to-br ${room.gradient} border-2 border-white/30 flex items-center justify-center text-white text-[10px] font-bold`}>
+                                {room.avatar}
+                              </div>
+                              <span className="text-white/70 text-xs">{room.host}</span>
+                            </div>
+                            <span className="flex items-center gap-1 text-white/60 text-xs">
+                              <Users size={11} /> {room.users}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-
-                    {/* RIGHT */}
-                    <div className="flex items-center gap-1.5 sm:gap-2 ml-1 flex-shrink-0">
-                      <span className="flex items-center gap-0.5 sm:gap-1 bg-[#6B4A2D] text-white px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium whitespace-nowrap">
-                        <Users size={10} className="sm:w-3 sm:h-3" />
-                        <span className="hidden sm:inline">{room.users}</span>
-                        <span className="sm:hidden text-[10px]">{room.users}</span>
-                      </span>
-
-                      <span className="bg-orange-400/90 text-white px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-medium whitespace-nowrap">
-                        {room.mode}
-                      </span>
-                    </div>
-                    </div>
                   </motion.div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
 
-          <CarouselPrevious className="-left-6 sm:-left-10 bg-orange-500 text-black hover:opacity-90 border-0" />
-          <CarouselNext className="-right-6 sm:-right-10 bg-orange-500 text-black hover:opacity-90 border-0" />
-        </Carousel>
-      </div>
-    </section>
+            <CarouselPrevious className="-left-8 bg-orange-500 text-black hover:bg-orange-400 border-0" />
+            <CarouselNext className="-right-8 bg-orange-500 text-black hover:bg-orange-400 border-0" />
+          </Carousel>
+        </div>
+      </section>
     </>
   );
 }
