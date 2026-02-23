@@ -12,28 +12,28 @@ import {
 
 const pauseItems = [
   {
-    title: "Meditation for Focus",
+    title: "Bollywood Gossip 🎬",
     views: 5600,
     image:
-      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format",
+      "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=800&auto=format",
   },
   {
-    title: "Nature Sounds",
+    title: "Cricket Talk 🏏",
     views: 8200,
     image:
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&auto=format",
+      "https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&auto=format",
   },
   {
-    title: "Breathing Exercises",
+    title: "Relationship Advice 💕",
     views: 4300,
     image:
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&auto=format",
+      "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&auto=format",
   },
   {
-    title: "Calming Music",
+    title: "Late Night Chill 🌙",
     views: 9100,
     image:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&auto=format",
+      "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format",
   },
 ];
 
@@ -59,11 +59,11 @@ export default function PauseSection({ userRole }: { userRole?: string }) {
         <div className="flex items-start justify-between mb-16">
           <div>
             <span className="inline-flex items-center gap-2 px-10 py-5 rounded-full bg-[#2A1E14] border border-orange-400/30 text-orange-400 font-semibold">
-              📍 PAUSE 🧘
+              ☕ PAUSE & CHILL
             </span>
 
             <p className="text-white/70 mt-6 text-lg">
-              Refresh, relax & reset your mind
+              Gossip, general talks & fun conversations
             </p>
           </div>
 

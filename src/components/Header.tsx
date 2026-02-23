@@ -47,6 +47,7 @@ const Header = () => {
             <>
               <Link to="/live-sessions" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Live</Link>
               <Link to="/discuss" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Discuss</Link>
+              <Link to="/learn" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Learn</Link>
               <Link to="/support" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Support</Link>
               <Link to="/pause" className="text-muted-foreground hover:text-foreground transition-colors text-sm">Pause</Link>
               {userProfile?.role === 'CREATE' && (
@@ -154,6 +155,7 @@ const Header = () => {
               <>
                 <Link to="/live-sessions" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Live</Link>
                 <Link to="/discuss" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Discuss</Link>
+                <Link to="/learn" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Learn</Link>
                 <Link to="/support" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Support</Link>
                 <Link to="/pause" onClick={() => setIsMenuOpen(false)} className="text-muted-foreground hover:text-foreground transition-colors">Pause</Link>
                 {userProfile?.role === 'CREATE' && (
